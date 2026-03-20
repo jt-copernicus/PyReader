@@ -21,6 +21,8 @@ This program is free software: you can redistribute it and/or modify it under th
 
 ### Setup
 ```bash
+git clone https://github.com/jt-copernicus/PyReader.git
+cd PyReader/
 chmod +x install.sh
 sudo ./install.sh
 ```
