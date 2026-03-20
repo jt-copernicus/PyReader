@@ -1,0 +1,171 @@
+.TH PYREADER 1 "March 2026" "PyReader 1.0" "User Commands"
+.SH NAME
+pyreader \- an ncurses ebook reader supporting FB2 and EPUB formats
+.SH SYNOPSIS
+.B pyreader
+.SH DESCRIPTION
+.B PyReader
+is a terminal-based ebook reader that supports FictionBook 2 (FB2) and EPUB formats.
+It provides a simple ncurses interface for browsing, searching, and reading ebooks
+in the terminal.
+.PP
+The application maintains a library of books from configured directories,
+automatically rescans for new books on startup, and remembers reading positions
+across sessions.
+.SH FIRST RUN
+On first launch, PyReader will prompt for the path to your books directory.
+Enter the full path to a directory containing FB2 and/or EPUB files.
+.PP
+Additional library paths can be added later using Ctrl+L from the library view.
+.SH LIBRARY VIEW
+The library view displays a scrollable, alphabetically sorted list of all
+discovered books. Each book is assigned a unique number for quick access.
+.SS Library View Controls
+.TP
+.BR "Up Arrow / Down Arrow"
+Navigate through the book list.
+.TP
+.BR "Page Up / Page Down"
+Scroll the list by 10 entries.
+.TP
+.BR "Home"
+Jump to the first book in the list.
+.TP
+.BR "End"
+Jump to the last book in the list.
+.TP
+.BR "Enter"
+Open the currently selected book.
+.TP
+.BR "0-9"
+Type a book number, then press Enter to jump directly to that book.
+.TP
+.BR "Ctrl+W"
+Activate search mode. Type a query and press Enter to search.
+Search matches book titles, authors, or numeric IDs.
+.TP
+.BR "Ctrl+L"
+Add a new library path. You will be prompted to enter a directory path.
+.TP
+.BR "ESC"
+Press once to display exit warning. Press again to quit the application.
+.TP
+.BR "Q"
+Same as ESC - displays exit warning, press again to quit.
+.SH SEARCH MODE
+Press Ctrl+W to enter search mode. The search bar will appear at the top
+of the library view.
+.SS Search Behavior
+.IP \(bu 2
+If the query is numeric, it matches the book ID number.
+.IP \(bu 2
+Otherwise, the query matches against book titles and author names
+(case-insensitive substring match).
+.IP \(bu 2
+Press Enter to execute the search.
+.IP \(bu 2
+Press ESC to cancel and return to the full book list.
+.SS Search Results
+After searching, the book list is filtered to show only matching results.
+Navigate and open books as in the normal library view.
+To clear the search and view all books, press Ctrl+W then Enter with an
+empty query, or press ESC.
+.SH READER VIEW
+The reader view displays the book content with automatic text wrapping
+to fit the terminal width. The current page and total pages are shown
+at the bottom of the screen.
+.SS Reader View Controls
+.TP
+.BR "Right Arrow / Down Arrow / Page Down / N"
+Advance to the next page.
+.TP
+.BR "Left Arrow / Up Arrow / Page Up / P"
+Go back to the previous page.
+.TP
+.BR "Space"
+Scroll down by one line (slower navigation within a page).
+.TP
+.BR "Home"
+Jump to the first page of the book.
+.TP
+.BR "End"
+Jump to the last page of the book.
+.TP
+.BR "ESC / Q"
+Close the current book and return to the library view. The current
+reading position is automatically saved.
+.SH CONFIGURATION
+Configuration is stored in
+.I ~/.pyreader_config.json
+and includes:
+.IP \(bu 2
+Library paths (list of directories to scan)
+.IP \(bu 2
+Last opened book file path
+.IP \(bu 2
+Last reading position (page number)
+.PP
+This file is created automatically and should not be edited manually
+unless the application is not running.
+.SH SUPPORTED FORMATS
+.SS FictionBook 2 (FB2)
+Full support for FB2 files including:
+.IP \(bu 2
+Title and author extraction from metadata
+.IP \(bu 2
+Paragraph and section rendering
+.IP \(bu 2
+Subtitle formatting
+.SS EPUB
+Support for EPUB files including:
+.IP \(bu 2
+Title and author extraction from OPF metadata
+.IP \(bu 2
+HTML content parsing and text extraction
+.IP \(bu 2
+Reading order determined from OPF spine
+.PP
+Note: EPUB support focuses on text content. Complex formatting,
+images, and tables may not render optimally.
+.SH ENVIRONMENT
+.TP
+.B TERM
+Terminal type. PyReader requires a terminal with ncurses support.
+Common compatible terminals include xterm, gnome-terminal, konsole,
+alacritty, and tmux.
+.SH FILES
+.TP
+.I ~/.pyreader_config.json
+User configuration file containing library paths and reading positions.
+.SH TIPS
+.IP 1. 4
+Use the number jump feature for quick access: type the book number
+and press Enter.
+.IP 2. 4
+Organize books in directories by author or genre, then add multiple
+library paths with Ctrl+L.
+.IP 3. 4
+The application remembers your last position, so you can quit and
+resume reading later from the same page.
+.IP 4. 4
+Resize your terminal to change text wrapping. The book will be
+repaginated automatically.
+.IP 5. 4
+Search supports partial matches - you don't need to type the full title.
+.SH EXIT STATUS
+.TP
+.B 0
+Successful program execution.
+.TP
+.B 1
+Error during initialization or terminal setup.
+.SH BUGS
+Report bugs at: https://github.com/jt-copernicus/PyReader/issues
+.SH AUTHOR
+Jonathan Torres
+.SH LICENSE
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+.SH SEE ALSO
+.BR fb2 (5),
+.BR epub (5),
+.BR ncurses (3)

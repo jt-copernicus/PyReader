@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wrapper script for PyReader
+#Licensed under GPL-3.0-or-later
+python3 /usr/local/share/pyreader/pyreader.py "$@"
